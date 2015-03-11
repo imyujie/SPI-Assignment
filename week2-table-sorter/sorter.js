@@ -1,5 +1,5 @@
 !(function() {
-    
+
     var TableSorter = function(options) {
         this.options = options;
         this.ths = this.options.table.getElementsByTagName('th');
@@ -9,28 +9,26 @@
 
     TableSorter.prototype = {
         hasClass: function(ele, cl) {
-            return ele.className.match(new RegExp('(\\s|^)' + cl + '(\\s|$)'));
+            var res = ele.className.indexOf(cl) === -1 ? false : true;
+            return res;
         },
         removeClass: function(ele, cl) {
-            if (this.hasClass(ele, cl)) {
-                ele.className = ele.className.replace(new RegExp('(\\s|^)' + cl + '(\\s|$)'), '');
-            }
+            ele.className = this.hasClass(ele, cl) ? ele.className.replace(cl, '') : ele.className;
         },
         addClass: function(ele, cl) {
             ele.className = this.hasClass(ele, cl) ? ele.className + ' ' + cl : cl;
         },
         reset: function(arr) {
-            for (var j = 0; j < arr.length; j++) {
+            for (var j = 0, len = arr.length; j < len; j++) {
                 this.removeClass(arr[j], this.options.ascendClass);
                 this.removeClass(arr[j], this.options.descendClass);
             }
         },
         listen: function() {
             var self = this;
-            for (var i = 0; i < this.ths.length; i++) {
-                self.ths[i].onclick = 
+            for (var i = 0, len =  this.ths.length; i < len; i++) {
                 (function(idx) {
-                    return function() {
+                    var clickToSort = function() {
                         if (self.hasClass(this, self.options.ascendClass)) {
                             self.reset(self.ths);
                             self.removeClass(this, self.options.ascendClass);
@@ -44,6 +42,8 @@
                             self.sort(idx, 'asc');
                         }
                     };
+
+                    self.ths[i].addEventListener('click', clickToSort, false);
                 })(i);
             }
         },
@@ -63,11 +63,12 @@
                     }
                 }
                 if (k > i) {
-                    tmp = table.rows[i].innerHTML;
+                    var tmp = table.rows[i].innerHTML;
                     table.rows[i].innerHTML = table.rows[k].innerHTML;
                     table.rows[k].innerHTML = tmp;
                 }
             }
+
         }
     };
 
@@ -76,7 +77,7 @@
     };
 
     var makeAllTableSortable = function(tables) {
-        for (var i = 0; i < tables.length; i++) {
+        for (var i = 0, len = tables.length; i < len; i++) {
             var tb = new TableSorter({
                 table: tables[i],
                 ascendClass: 'ascend',

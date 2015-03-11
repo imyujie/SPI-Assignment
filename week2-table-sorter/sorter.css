@@ -17,8 +17,12 @@ thead > tr {
 }
 
 th {
+    height: 26px;
+
     cursor: pointer;
     -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
 }
 
 th,
@@ -45,23 +49,7 @@ th.ascend {
     background-color: #a7aefc;
 }
 
-th.descend:after {
-    position: absolute;
-    top: 0;
-    right: 5px;
-
-    width: 20px;
-    height: 26px;
-
-    content: '';
-
-    background-image: url(descend.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-background-size: 20px;
-            background-size: 20px;
-}
-
+th.descend:after,
 th.ascend:after {
     position: absolute;
     top: 0;
@@ -72,9 +60,16 @@ th.ascend:after {
 
     content: '';
 
-    background-image: url(ascend.png);
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: 20px;
             background-size: 20px;
+}
+
+th.descend:after {
+    background-image: url(descend.png);
+}
+
+th.ascend:after {
+    background-image: url(ascend.png);
 }
