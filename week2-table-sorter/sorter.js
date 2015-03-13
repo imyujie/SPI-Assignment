@@ -1,6 +1,6 @@
 ;(function() {
 
-    'use strict'
+    'use strict';
 
     /**
      * @brief TableSorter can be use to make table elements be sortable.
