@@ -1,10 +1,25 @@
 ;(function() {
-    "use strict"
+
+    'use strict'
+
+    /**
+     * @brief TableSorter can be use to make table elements be sortable.
+     * @details 对具有表头thead的表格适用
+     * 
+     * @param  options {object} 相关配置
+     * 
+     * @method  hasClass, removeClass, addClass 操作样式
+     * @method  reset 去除表头添加的样式
+     * @method  listen 为表头每一个单元格添加事件监听器
+     * @method  sort 对tBody每一行排序
+     * @method  compareFunc 比较函数，当单元格内容为数字时不应为字典序
+     */
+
     var TableSorter = function(options) {
         this.options = options;
-        this.ths = this.options.table.getElementsByTagName('th');
-        this.tbody = this.options.table.getElementsByTagName('tbody')[0];
-        this.tr = this.options.table.getElementsByTagName('tbody')[0].rows;
+        this.tbody = this.options.table.tBodies[0];
+        this.tr = this.options.table.tBodies[0].rows;
+        this.ths = this.options.table.tHead.rows[0].cells;
         this.compareFunc = this.compareFunc || this.options.compareFunc;
         this.trs = [];
         for (var i = 0, len = this.tr.length; i < len; i++) {
@@ -29,9 +44,9 @@
         },
 
         reset: function(arr) {
-            for (var j = 0, len = arr.length; j < len; j++) {
-                this.removeClass(arr[j], this.options.ascendClass);
-                this.removeClass(arr[j], this.options.descendClass);
+            for (var i = 0, len = arr.length; i < len; i++) {
+                this.removeClass(arr[i], this.options.ascendClass);
+                this.removeClass(arr[i], this.options.descendClass);
             }
         },
 
@@ -73,8 +88,9 @@
 
         compareFunc: function(criteria, type) {
             return function(x, y) {
-                var x1 = x.cells[criteria].innerHTML,
-                    y1 = y.cells[criteria].innerHTML;
+                var x1 = x.cells[criteria].textContent || x.cells[criteria].innerHTML,
+                    y1 = y.cells[criteria].textContent || y.cells[criteria].innerHTML;
+                
                 if (!isNaN(x1)) {
                     return type === 'asc' ? x1 - y1 : y1 - x1;
                 } else {
