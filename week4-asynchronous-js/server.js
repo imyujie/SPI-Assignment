@@ -52,8 +52,8 @@ function handlePage(req, res, pathname) {
 }
 
 function handleAjax(req, res) {
-  var random_time = 100 + getRandomNumber(1000);
-  var random_num  = 1 + getRandomNumber(9);
+  var random_time = 500 + getRandomNumber(500);
+  var random_num  = 1 + getRandomNumber(8);
   setTimeout(function(){
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end("" + random_num);
