@@ -4,17 +4,9 @@ http://my.ss.sysu.edu.cn/wiki/display/SPSP/Lab+04.+Asynchronous+JavaScript
 
 ##HOW TO BUILD
 
-1. 下载整个文件目录，在根目录下，打开命令行执行如下代码：
-
-`npm install`
-
-2. 完成第一步后，执行：
-
-`grunt`
-
-3. 完成后，运行服务器：
-
-`node server`
+1. 下载整个文件目录，在根目录下，打开命令行执行如下代码：`npm install`
+2. 完成第一步后，执行：`grunt`
+3. 完成后，运行服务器：`node server`
 
 ##HOW TO RUN
 
