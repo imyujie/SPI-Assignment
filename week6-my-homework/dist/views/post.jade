@@ -4,22 +4,39 @@ block content
   .myhw-wrapper
     include ./includes/breadcrumb.jade
     .ui.piled.segment.myhw-segment
-      form.ui.form.assign-form(action='/assign', method="post")
+      form.ui.form.assign-form(action='#{to}', method="post")
         .required.field
           label 标题
           .ui.corner.labeled.input
-            input(type='text', name='title', required='')
-            .ui.corner.label
-              i.asterisk.icon
+            if assignment
+              input(type='text', name='title', required='', value='#{assignment.title}', disabled='disabled')
+              .ui.corner.label
+                i.asterisk.icon
+            else
+              input(type='text', name='title', required='')
+              .ui.corner.label
+                i.asterisk.icon
         .field.required
           label 截止日期
           .ui.icon.input
-            input#datetimepicker(type='text', name='deadline', value='2015-05-01 21:05', data-date-format='yyyy-mm-dd hh:ii', required='')
+            if assignment
+              input#datetimepicker(type='text', name='deadline', value='#{assignment.datestring}', data-date-format='yyyy-mm-dd hh:ii', required='')
+              input(type='hidden', name='aid', value='#{assignment._id}')
+            else
+              input#datetimepicker(type='text', name='deadline', value='2015-05-01 21:05', data-date-format='yyyy-mm-dd hh:ii', required='')
             i.calendar.icon
         .field.required
           label 描述
           .ui.corner.labeled.input
-            textarea(name='description', required='')
+            if assignment
+              textarea(name='description', required='')
+                | #{assignment.description}
+            else
+              textarea(name='description', required='')
             .ui.corner.label
               i.asterisk.icon
-        .ui.submit.positive.button.assign-form-submit 发布作业
+        .ui.submit.positive.button.assign-form-submit
+          if assignment
+            | 修改要求
+          else
+            | 发布作业

@@ -1,13 +1,23 @@
 .ui.grid
   .ten.wide.column
     .ui.large.breadcrumb
-      a.section 首页
-      i.right.chevron.icon.divider
-      a.section 作业库
-      i.right.chevron.icon.divider
-      .active.section 软件过程改进
+      - var len = links.length - 1
+      each val, index in links
+        if index == len
+          .active.section #{val.name}
+        else
+          a.section(href='#{val.to}') #{val.name}
+          i.right.chevron.icon.divider
   if user
     .six.wide.column
-      a(href='/logout')
+      a(href='/signout')
         | 退出登录
         i.sign.out.icon
+
+      a(href='/assign')
+        i.plus.icon
+        | 发布作业|
+
+      span.right.user-name
+        i.user.icon
+        | #{user.name},

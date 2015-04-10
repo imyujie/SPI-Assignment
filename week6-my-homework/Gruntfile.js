@@ -94,7 +94,7 @@ module.exports = function(grunt) {
         }
       },
       copy: {
-        files: ['public/views/*'],
+        files: ['public/views/**/*.jade'],
         tasks: ['copy']
       }
     }
