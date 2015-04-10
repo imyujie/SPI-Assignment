@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .myhw-wrapper
+    include ./includes/breadcrumb.jade
+    .ui.piled.segment.myhw-segment
+      form.ui.form.myhw-register-form(action='/signup', method='post')
+        h4.ui.dividing.header 账户信息
+        .two.fields
+          .required.field
+            label 用户名
+            .ui.icon.input
+              input(type='text', name='username', placeholder='Username', required='')
+              i.user.icon
+          .required.field
+            label 密码
+            .ui.icon.input
+              input(type='password', name='password', placeholder='Password', required='')
+              i.lock.icon
+        h4.ui.dividing.header 个人信息
+        .two.fields
+          .required.field
+            label 名字
+            .ui.corner.labeled.input
+              input(type='text', name='name', placeholder='Name', required='')
+              .ui.corner.label
+                i.asterisk.icon
+          .field.required
+            label 类别
+            .ui.buttons.myhw-identity
+              #teacher.ui.button 教师
+              .or
+              input#identity(type='hidden', name='identity', value='0')
+              #student.ui.positive.button 学生
+        .two.fields
+          .field.required
+            label 电邮
+            .ui.corner.labeled.input
+              input(type='email', name='email', placeholder='Email', required='')
+              .ui.corner.label
+                i.asterisk.icon
+          .field
+        #myhw-submit.ui.submit.positive.button 立即注册
+        .ui.bottom.error.message
+          i.remove.circle.icon
+          |       Already signed up?
+          a(href='#') Login here
+          |  instead.

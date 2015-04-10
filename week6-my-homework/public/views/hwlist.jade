@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .myhw-wrapper
+    include ./includes/breadcrumb.jade
+    .ui.cards
+      each val in asmlist
+        a.card.myhw-card(href='/assignments/#{val._id}')
+          .content
+            .header #{val.title}
+            .meta
+              i.wait.icon
+              | #{val.deadline}
+            .description
+              | #{val.description}

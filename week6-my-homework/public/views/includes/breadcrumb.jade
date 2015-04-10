@@ -1,0 +1,13 @@
+.ui.grid
+  .ten.wide.column
+    .ui.large.breadcrumb
+      a.section 首页
+      i.right.chevron.icon.divider
+      a.section 作业库
+      i.right.chevron.icon.divider
+      .active.section 软件过程改进
+  if user
+    .six.wide.column
+      a(href='/logout')
+        | 退出登录
+        i.sign.out.icon

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .myhw-wrapper.myhw-login
+    .ui.piled.segment.myhw-segment
+      .ui.two.column.middle.aligned.relaxed.fitted.grid
+        .column
+          form#login-form.ui.form.segment(action='/login', method='post')
+            .field
+              label 用户名
+              .ui.left.icon.input
+                input(type='text', name='username', placeholder='Username', required='')
+                i.user.icon
+            .field
+              label 密码
+              .ui.left.icon.input
+                input(type='password', name='password', placeholder='Password', required='')
+                i.lock.icon
+            .ui.blue.submit.button.login-btn 登录
+        .ui.vertical.divider
+          | Or
+        .center.aligned.column
+          .huge.green.ui.labeled.icon.button.myhw-register
+            i.signup.icon
+            | 立即注册

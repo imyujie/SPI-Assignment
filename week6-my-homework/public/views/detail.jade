@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  .myhw-wrapper
+    include ./includes/breadcrumb.jade
+    .ui.piled.segment.myhw-segment
+      .ui.green.ribbon.label
+        i.male.icon
+        | #{assignment.teacher}
+      h2.ui.header
+        i.graduation.icon
+        .content
+          | #{assignment.title}
+      p
+        | #{assignment.description}
+      .ui.icon.error.message
+        i.attention.circle.icon
+        .content
+          .header 截止日期
+          p #{assignment.deadline}
+
+      if user.identity == 0
+        form.upload-homework-form(enctype='multipart/form-data', action='/upload', method='post')
+          .ui.left.action.input
+            button.ui.teal.labeled.icon.button
+              i.upload.icon
+              | 上传文件
+            input.myhw-upload(type='file', name='homework')
+            input(type='hidden', name='assignment_id', value='#{assignment._id}')
+            input(type='hidden', name='assignment_title', value='#{assignment.title}')
+            input.file-path(type='text', value='点击左侧按钮上传', disabled='')
+          .ui.labeled.positive.icon.button.homework-submit-btn
+            i.checkmark.icon
+            | 提交作业
+      else
+        .ui.labeled.pink.icon.button.update-deadline
+          i.history.icon
+          | 更新截止日期
+        .myhw-list
+          table.ui.celled.striped.table
+            thead
+              tr
+                th(colspan='3')
+                  | 已提交作业
+            tbody
+              each val in hwlist
+                tr
+                  td
+                    a(href='#')
+                      i.tasks.icon
+                      | val.title
+                  td.right.aligned.collapsing val.time
+
+    if user.identity == 1
+      .ui.basic.modal
+        i.close.icon
+        .header
+          | 更新截止日期
+        .content
+          form.ui.form
+            .field.required
+              .ui.icon.input
+                input#datetimepicker(type='text', value='2015-05-01 21:05', data-date-format='yyyy-mm-dd hh:ii', required='')
+                i.calendar.icon
+            .ui.bottom.error.message
+              i.remove.circle.icon
+              | Already signed up?
+              a(href='#') Login here
+              | instead.
+        .actions
+          .two.fluid.ui.inverted.buttons
+            .ui.red.basic.inverted.button
+              i.remove.icon
+              | 取消并关闭
+            .ui.green.basic.inverted.button
+              i.checkmark.icon
+              | 确定更新

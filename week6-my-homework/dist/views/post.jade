@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .myhw-wrapper
+    include ./includes/breadcrumb.jade
+    .ui.piled.segment.myhw-segment
+      form.ui.form.assign-form(action='/assign', method="post")
+        .required.field
+          label 标题
+          .ui.corner.labeled.input
+            input(type='text', name='title', required='')
+            .ui.corner.label
+              i.asterisk.icon
+        .field.required
+          label 截止日期
+          .ui.icon.input
+            input#datetimepicker(type='text', name='deadline', value='2015-05-01 21:05', data-date-format='yyyy-mm-dd hh:ii', required='')
+            i.calendar.icon
+        .field.required
+          label 描述
+          .ui.corner.labeled.input
+            textarea(name='description', required='')
+            .ui.corner.label
+              i.asterisk.icon
+        .ui.submit.positive.button.assign-form-submit 发布作业
